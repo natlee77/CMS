@@ -1,0 +1,31 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("1fa70c57-ea13-4f94-b61d-a2f2d72957a3"))
+    .Descendants()
+    .Where(x => x.IsVisible() &&
+    (x.IsDocumentType("gossipArticle") ||
+    x.IsDocumentType("newsArticle") ||
+    x.IsDocumentType("reviewArticle")))
+    .OrderByDescending(x => x.CreateDate).Take(10);
+}
+ 
+	@foreach (var item in selection)
+	{
+		<div>
+			  <h3> @item.Value("teaserTitle")</h3>
+		</div>
+		<div>
+		    @{
+		    var image  = item.Value<IPublishedContent>("teaserImage");
+		    }
+		    <img src="@image.Url()"  class="img-fluid" />
+		</div>
+	}
+ 
+

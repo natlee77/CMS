@@ -1,0 +1,13 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ReviewArticle>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+
+<div> <h1> @Model.Value("teaserTitle") </h1></div>
+<div>
+    <img src="@Model.TeaserImage.Url()"  class="img-fluid"/>
+</div>
+<div>@Model.Value("reviewContent")</div>

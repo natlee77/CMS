@@ -1,0 +1,22 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Reviews>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("66756db6-9e55-4a39-bfa6-ee923ade091e"))
+    .ChildrenOfType("reviewArticle")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate);
+}
+<ul>
+	@foreach (var item in selection)
+	{
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+	}
+</ul>
+
